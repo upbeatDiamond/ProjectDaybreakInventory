@@ -25,6 +25,7 @@ follow_focus = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="Slot6" parent="ScrollContainer/VBoxContainer" instance=ExtResource("1_6alu1")]
 layout_mode = 2

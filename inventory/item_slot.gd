@@ -1,13 +1,11 @@
-extends Control
-class_name InventoryList
+extends TextureButton
+class_name InventoryListItem
 
-var item_slots : Array = []
-
-
+signal selected( item:InventoryListItem )
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	focus_entered.connect(_on_focus_entered)
+	pressed.connect(_on_pressed)
 	pass # Replace with function body.
 
 
@@ -16,5 +14,14 @@ func _process(delta: float) -> void:
 	pass
 
 
+func _on_pressed():
+	print("Yippee!")
+
+
 func _on_focus_entered():
+	
+	pass
+
+
+func _on_focus_exited():
 	pass

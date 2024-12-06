@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2olg0a74vtmh"]
+
+[ext_resource type="Texture2D" uid="uid://b1en86lay4y7l" path="res://icon.svg" id="1_ltoqc"]
+[ext_resource type="PackedScene" uid="uid://cremvdxvlgaus" path="res://inventory/item_list.tscn" id="2_e0egu"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_ltoqc")
+expand_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(108, 56)
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+text = "A glass flute that awakens sleeping monsters..."
+
+[node name="Control" parent="HBoxContainer" instance=ExtResource("2_e0egu")]
+layout_mode = 2
+size_flags_horizontal = 3
