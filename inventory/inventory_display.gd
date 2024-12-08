@@ -3,6 +3,7 @@ extends Control
 var umid : int = 0
 
 @onready var item_list_display : InventoryList = $Control
+@onready var category_display : Label = $CategoryLabel
 
 enum HorizontalQueue {
 	NONE = 0,
@@ -20,6 +21,8 @@ enum VerticalQueue {
 
 var hori_held = 0
 var vert_held = 0
+var current_category := Inventory.Categories.UNSORTED
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,11 +56,8 @@ func _process(delta: float) -> void:
 	
 	if prior_hori_held != hori_held and hori_held == HorizontalQueue.NONE:
 		## post the horizontal movement!
-		item_list_display.clear_entries()
-		item_list_display.set_entry(0, 7, "Pineapple")
-		item_list_display.set_entry(1, 999, "Gas Powered Stick")
-		item_list_display.set_entry(2, 1, "Maddie Plush")
-		item_list_display.set_entry(3, 64, "Debug Stick")
+		
+		switch_category(current_category + 1)
 		pass
 	
 	if prior_vert_held != vert_held and vert_held == VerticalQueue.NONE:
@@ -68,11 +68,24 @@ func _process(delta: float) -> void:
 	pass
 
 
+func switch_category(category):
+	current_category = category % Inventory.Categories.MAX
+	
+	category_display.text = str("< ", Inventory.category_labels[current_category], " >")
+	
+	item_list_display.clear_entries()
+	item_list_display.set_entry(0, 7, "Pineapple")
+	item_list_display.set_entry(1, 999, "Gas Powered Stick")
+	item_list_display.set_entry(2, 1, "Maddie Plush")
+	item_list_display.set_entry(3, 64, "Debug Stick")
+	pass
+
+
 func set_umid(_umid:int=0):
 	umid = _umid
 	_reset_cache()
 
 
 func _reset_cache():
-	
+	item_list_display.clear_entries()
 	pass

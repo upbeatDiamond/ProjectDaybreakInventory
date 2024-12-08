@@ -56,7 +56,7 @@ offset_right = 257.0
 offset_bottom = 122.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="."]
+[node name="CategoryLabel" type="Label" parent="."]
 layout_mode = 2
 offset_top = 18.0
 offset_right = 100.0
