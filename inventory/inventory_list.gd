@@ -38,11 +38,14 @@ func _on_focus_entered():
 
 
 func clear_entries():
-	
+	if busy:
+		await busy_ended
+	busy = true
 	for item in slot_list.get_children():
 		item.queue_free()
 	
-	pass
+	busy = false
+	busy_ended.emit()
 
 
 ## If the item cannot be found, add it to the list

@@ -73,7 +73,7 @@ func switch_category(category):
 	
 	category_display.text = str("< ", Inventory.category_labels[current_category], " >")
 	
-	item_list_display.clear_entries()
+	_reset_cache()
 	item_list_display.set_entry(0, 7, "Pineapple")
 	item_list_display.set_entry(1, 999, "Gas Powered Stick")
 	item_list_display.set_entry(2, 1, "Maddie Plush")
@@ -87,5 +87,6 @@ func set_umid(_umid:int=0):
 
 
 func _reset_cache():
-	item_list_display.clear_entries()
+	await item_list_display.clear_entries()
+	await get_tree().process_frame
 	pass
