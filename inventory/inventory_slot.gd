@@ -5,30 +5,20 @@ signal selected( item:InventoryListItem )
 
 var count : int = 0 :
 	set(value):
-		count_label = str("x", value)
 		count = value
 		dirty = true
-	get:
-		if count_label != null:
-			return count_label.text.to_int()
-		return count
 
 var text : String = "" :
 	set(value):
-		name_label = str(value)
 		text = value
 		dirty = true
-	get:
-		if name_label != null:
-			return name_label.text
-		return text
 
 var dirty := true
 var item = "null"
 var list_index : int = 0
 
-@onready var count_label = $Count
-@onready var name_label = $HBoxContainer/Name
+@onready var count_label : Label = $Count
+@onready var name_label : Label = $HBoxContainer/Name
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,13 +40,16 @@ func _update_labels():
 	
 	## If the count didn't change, it's still dirty.
 	if count_label != null:
-		count_label.text = str(count)
+		count_label.text = str("x", count)
 	else:
 		clean = false
 	
+	if text == null or text == "":
+		text = str(item)
+	
 	## If the name didn't change, it's still dirty.
 	if name_label != null:
-		name_label.text = str(item)
+		name_label.text = text
 	else:
 		clean = false
 	

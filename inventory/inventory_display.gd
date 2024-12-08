@@ -2,7 +2,7 @@ extends Control
 
 var umid : int = 0
 
-@onready var item_list : InventoryList = $Control
+@onready var item_list_display : InventoryList = $Control
 
 enum HorizontalQueue {
 	NONE = 0,
@@ -53,11 +53,16 @@ func _process(delta: float) -> void:
 	
 	if prior_hori_held != hori_held and hori_held == HorizontalQueue.NONE:
 		## post the horizontal movement!
+		item_list_display.clear_entries()
+		item_list_display.set_entry(0, 7, "Pineapple")
+		item_list_display.set_entry(1, 999, "Gas Powered Stick")
+		item_list_display.set_entry(2, 1, "Maddie Plush")
+		item_list_display.set_entry(3, 64, "Debug Stick")
 		pass
 	
 	if prior_vert_held != vert_held and vert_held == VerticalQueue.NONE:
 		## post the vertical movement!
-		item_list.current_selected += 1
+		item_list_display.current_selected += 1
 		pass
 	
 	pass
