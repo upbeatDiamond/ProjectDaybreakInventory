@@ -3,6 +3,14 @@ class_name InventoryListItem
 
 signal selected( item:InventoryListItem )
 
+var count : int = 0
+var text : String = ""
+var item = "null"
+
+@onready var count_label = $Count
+@onready var name_label = $HBoxContainer/Name
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pressed.connect(_on_pressed)
@@ -25,3 +33,8 @@ func _on_focus_entered():
 
 func _on_focus_exited():
 	pass
+
+
+func set_count(_count:int=count):
+	count = _count
+	count_label.text = str("x", count)

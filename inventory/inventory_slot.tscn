@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://4v1f27fm1r4"]
 
-[ext_resource type="Texture2D" uid="uid://b1en86lay4y7l" path="res://icon.svg" id="1_pxcx6"]
-[ext_resource type="Texture2D" uid="uid://c3hi8hd0ljkrv" path="res://assets/textures/inventory/move_select_battle_bg.png" id="1_qv85v"]
-[ext_resource type="Script" path="res://inventory/item_slot.gd" id="2_f2wg7"]
+[ext_resource type="Texture2D" uid="uid://c3hi8hd0ljkrv" path="res://assets/textures/inventory/move_select_battle_bg.png" id="1_e1nma"]
+[ext_resource type="Texture2D" uid="uid://b1en86lay4y7l" path="res://icon.svg" id="2_gkexx"]
+[ext_resource type="Script" path="res://inventory/inventory_slot.gd" id="3_v2wt7"]
 
 [node name="Slot" type="TextureButton"]
 custom_minimum_size = Vector2(15, 15)
@@ -14,11 +14,11 @@ offset_right = -157.0
 offset_bottom = -295.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("1_qv85v")
-texture_focused = ExtResource("1_pxcx6")
+texture_normal = ExtResource("1_e1nma")
+texture_focused = ExtResource("2_gkexx")
 ignore_texture_size = true
 stretch_mode = 0
-script = ExtResource("2_f2wg7")
+script = ExtResource("3_v2wt7")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 visible = false
@@ -29,7 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_qv85v")
+texture = ExtResource("1_e1nma")
 region_rect = Rect2(0, 0, 111, 22)
 patch_margin_left = 2
 patch_margin_top = 2
