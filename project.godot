@@ -15,6 +15,19 @@ run/main_scene="res://inventory/inventory.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalBitManip="*res://global/global_bit_manip.gd"
+GlobalDatabase="*res://global/global_database.gd"
+GlobalDayCycle="*res://global/global_day_cycle.gd"
+GlobalDirector="*res://global/global_director.gd"
+GlobalGamepieceTransfer="*res://global/global_gamepiece_transfer.gd"
+GlobalMonster="*res://global/global_monster.gd"
+GlobalMonsterSpawner="*res://global/global_monster_spawner.gd"
+GlobalRuntime="*res://global/global_runtime.gd"
+GlobalTechnique="*res://global/global_technique.gd"
+GlobalTrx="*res://global/global_trx.gd"
+
 [display]
 
 window/size/viewport_width=256
@@ -24,6 +37,10 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="Project Daybreak Inventory"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg")
 
 [input]
 
