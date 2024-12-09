@@ -596,7 +596,8 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 		query_conditions = str("bag_slot = '", compartment, "'") 
 	else:
 		query_conditions = "true"
-	var item_templates:Array = db.select_rows( "item", query_conditions, ["id", "tr_key", "sprite", "tr_key_detail"] )
+	var item_templates:Array = db.select_rows( "item", query_conditions, 
+			["id", "tr_key", "sprite", "tr_key_detail", "stack_size"] )
 	db.close_db()
 	
 	## Reformat the item templates from Patch Data to be easier to iterate through
@@ -606,6 +607,7 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 			"tr_key" : item["tr_key"],
 			"tr_key_detail" : item["tr_key_detail"],
 			"sprite_path" : item["sprite"],
+			"stack_size" : item["stack_size"]
 		}
 	
 	var filtered = []
@@ -614,10 +616,11 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 	## prepare to submit it to the function caller.
 	for row in fetched:
 		if row["item"] in templates.keys():
-			row["tr_key"] = templates[row["item"]]["tr_key"]
-			row["tr_key_detail"] = templates[row["item"]]["tr_key_detail"]
-			row["sprite_path"] = templates[row["item"]]["sprite_path"]
-			
+			var item = templates[row["item"]]
+			row["tr_key"] = item["tr_key"]
+			row["tr_key_detail"] = item["tr_key_detail"]
+			row["sprite_path"] = item["sprite_path"]
+			row["stack_size"] = item["stack_size"]
 			filtered.append(row)
 	
 	return filtered
