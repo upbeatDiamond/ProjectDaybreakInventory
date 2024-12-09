@@ -83,7 +83,8 @@ func _process(_delta: float) -> void:
 func switch_category(category):
 	current_category = posmod(category, Inventory.Categories.MAX) as Inventory.Categories
 	
-	
+	item_texture.visible = false
+	item_description.text = ""
 	category_display.text = str("< ", Inventory.category_labels[current_category], " >")
 	
 	var category_items = inventory.get_items_in_category(category)
@@ -103,7 +104,6 @@ func set_umid(_umid:int=0):
 
 func _reset_cache():
 	await item_list_display.clear_entries()
-	#await get_tree().process_frame
 	pass
 
 
@@ -116,4 +116,5 @@ func _update_selected_info(node:Control):
 	var sprite_path = node.get("sprite_path")
 	if sprite_path != null:
 		item_texture.texture = load(sprite_path)
+		item_texture.visible = true
 	pass

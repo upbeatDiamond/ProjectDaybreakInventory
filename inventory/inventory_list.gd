@@ -38,17 +38,17 @@ func _on_focus_entered():
 
 
 func clear_entries():
-	if busy:
-		await busy_ended
-	busy = true
+	#if busy:
+		#await busy_ended
+	#busy = true
 	
 	var children = slot_list.get_children().duplicate()
 	for item in children:
 		slot_list.remove_child(item)
 		item.queue_free()
 	
-	busy = false
-	busy_ended.emit()
+	#busy = false
+	#busy_ended.emit()
 
 
 ## If the item cannot be found, add it to the list
@@ -77,11 +77,6 @@ func set_entry(item, count:int, text:String, description:String, icon:String="")
 
 func _add_entry(item, count:int, text:String, description:String, icon:String=""):
 	
-	## Mutex to reduce chance of list corruption
-	if busy:
-		await busy_ended
-	busy = true
-	
 	## Create the item slot
 	var entry = INVENTORY_SLOT.instantiate()
 	entry.item = item
@@ -95,9 +90,6 @@ func _add_entry(item, count:int, text:String, description:String, icon:String=""
 	entry.selected.connect(_on_entry_selected)
 	
 	_sort_items()
-	
-	busy = false
-	busy_ended.emit()
 
 
 func _sort_items():
@@ -175,3 +167,15 @@ func selection_move_up():
 func _on_entry_selected(node:Control):
 	focus_updated.emit(node)
 	pass
+
+
+func _mutex(function:Callable, parameters:=[]):
+	## Mutex to reduce chance of list corruption
+	if busy:
+		await busy_ended
+	busy = true
+	
+	function.callv(parameters)
+	
+	busy = false
+	busy_ended.emit()
