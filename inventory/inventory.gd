@@ -34,6 +34,7 @@ func _init(_umid:int) -> void:
 
 func _repopulate() -> void:
 	
+	_clear_cache()
 	items.resize( Categories.MAX )
 	
 	for category in range(Categories.MAX):
@@ -42,3 +43,7 @@ func _repopulate() -> void:
 
 func get_items_in_category(category:int):
 	return items[category % Categories.MAX]
+
+
+func _clear_cache():
+	items = []

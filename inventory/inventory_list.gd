@@ -10,7 +10,7 @@ var current_selected := 0
 var busy := false
 
 
-
+signal focus_updated( node:Control )
 signal busy_ended
 
 
@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("make"):
 		var randix = randi_range(0, 1024)
-		set_entry(randix, randi_range(1, 64), str(randix) )
+		set_entry(randix, randi_range(1, 64), str(randix), str(randix) )
 	if Input.is_action_pressed("kill"):
 		clear_entries()
 	
@@ -54,7 +54,7 @@ func clear_entries():
 ## If the item cannot be found, add it to the list
 ## Set the item count to 'count'.
 ## If 'item' is a tag, change it to the index. If the index cannot be found, use a hash of the tag.
-func set_entry(item, count:int, text):
+func set_entry(item, count:int, text:String, description:String, icon:String=""):
 	
 	## TODO: Replace with database access!!!
 	if not item is int:
@@ -70,12 +70,12 @@ func set_entry(item, count:int, text):
 			break
 	
 	if not was_found:
-		_add_entry(item, count, text)
+		_add_entry(item, count, text, description)
 	
 	pass
 
 
-func _add_entry(item, count:int, text):
+func _add_entry(item, count:int, text:String, description:String, icon:String=""):
 	
 	## Mutex to reduce chance of list corruption
 	if busy:
@@ -87,8 +87,12 @@ func _add_entry(item, count:int, text):
 	entry.item = item
 	entry.count = count
 	entry.text = text
+	entry.description = description
+	if icon.is_valid_filename():
+		entry.icon_path = icon
 	slot_list.add_child(entry)
 	entry._update_labels()
+	entry.selected.connect(_on_entry_selected)
 	
 	_sort_items()
 	
@@ -166,3 +170,8 @@ func selection_move_down():
 
 func selection_move_up():
 	set_selection_index(current_selected - 1)
+
+
+func _on_entry_selected(node:Control):
+	focus_updated.emit(node)
+	pass

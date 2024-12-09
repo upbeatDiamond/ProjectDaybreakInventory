@@ -18,7 +18,7 @@ script = ExtResource("1_ht7p8")
 position = Vector2(126, 104)
 texture = ExtResource("2_7wfaa")
 
-[node name="VBoxContainer2" type="HBoxContainer" parent="."]
+[node name="Info" type="HBoxContainer" parent="."]
 layout_mode = 2
 offset_left = 40.0
 offset_top = 128.0
@@ -27,7 +27,7 @@ offset_bottom = 192.0
 size_flags_horizontal = 4
 size_flags_vertical = 10
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer2"]
+[node name="ItemTexture" type="TextureRect" parent="Info"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -35,7 +35,7 @@ size_flags_vertical = 4
 texture = ExtResource("1_ltoqc")
 expand_mode = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer2"]
+[node name="Description" type="RichTextLabel" parent="Info"]
 custom_minimum_size = Vector2(108, 56)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)

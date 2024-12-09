@@ -4,6 +4,8 @@ var umid : int = 0
 
 @onready var item_list_display : InventoryList = $InventoryList
 @onready var category_display : Label = $CategoryLabel
+@onready var item_description : RichTextLabel = $Info/Description
+@onready var item_texture : TextureRect = $Info/ItemTexture
 
 enum HorizontalQueue {
 	NONE = 0,
@@ -33,6 +35,7 @@ var inventory : Inventory
 func _ready() -> void:
 	GlobalDatabase.reset_save_file()
 	inventory = Inventory.new(0)
+	item_list_display.focus_updated.connect(_update_selected_info)
 	pass # Replace with function body.
 
 
@@ -87,10 +90,8 @@ func switch_category(category):
 	
 	await _reset_cache()
 	for item in category_items:
-		item_list_display.set_entry( str(item["item"]).to_int(), str(item["quantity"]).to_int(), item["tr_key"] )
-	#item_list_display.set_entry(1, 999, "Gas Powered Stick")
-	#item_list_display.set_entry(2, 1, "Maddie Plush")
-	#item_list_display.set_entry(3, 64, "Debug Stick")
+		item_list_display.set_entry( str(item["item"]).to_int(), str(item["quantity"]).to_int(), 
+		item["tr_key"], item["tr_key_detail"], item["sprite_path"] )
 	
 	pass
 
@@ -103,4 +104,16 @@ func set_umid(_umid:int=0):
 func _reset_cache():
 	await item_list_display.clear_entries()
 	#await get_tree().process_frame
+	pass
+
+
+func _update_selected_info(node:Control):
+	
+	var description = node.get("description")
+	if description != null:
+		item_description.text = description
+	
+	var sprite_path = node.get("sprite_path")
+	if sprite_path != null:
+		item_texture.texture = load(sprite_path)
 	pass

@@ -16,6 +16,8 @@ var text : String = "" :
 var dirty := true
 var item = "null"
 var list_index : int = 0
+var description : = ""
+var icon_path : String = ""
 
 @onready var count_label : Label = $Count
 @onready var name_label : Label = $HBoxContainer/Name
@@ -25,6 +27,8 @@ var list_index : int = 0
 func _ready() -> void:
 	pressed.connect(_on_pressed)
 	_update_labels()
+	focus_entered.connect(_on_focus_entered)
+	focus_exited.connect(_on_focus_exited)
 	pass # Replace with function body.
 
 
@@ -58,14 +62,16 @@ func _update_labels():
 
 func _on_pressed():
 	print("Yippee!")
+	
 
 
 func _on_focus_entered():
-	
+	selected.emit(self)
 	pass
 
 
 func _on_focus_exited():
+	
 	pass
 
 

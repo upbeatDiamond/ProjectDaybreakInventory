@@ -53,7 +53,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
-text = "Gas powered stick"
+text = "..."
 
 [node name="Count" type="Label" parent="."]
 layout_mode = 1
@@ -69,4 +69,4 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
-text = "x999"
+text = "x0"
