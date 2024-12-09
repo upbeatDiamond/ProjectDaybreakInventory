@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("make"):
 		var randix = randi_range(0, 1024)
@@ -107,7 +107,7 @@ func _sort_items():
 	for node in sorted_nodes:
 		slot_list.add_child(node)
 	
-	var list_size = slot_list.get_children().size()
+	#var list_size = slot_list.get_children().size()
 	
 	## Have the neighbors properly assigned, so if the overall display fails, 
 	## the keyboard input still works.

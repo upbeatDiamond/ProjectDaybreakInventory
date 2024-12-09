@@ -26,8 +26,8 @@ var umid := 0
 var items : Array[Array] = []
 
 
-func _init(umid:int) -> void:
-	self.umid = umid
+func _init(_umid:int) -> void:
+	self.umid = _umid
 	_repopulate()
 	pass
 

@@ -37,7 +37,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var prior_hori_held = hori_held
 	var prior_vert_held = vert_held
 	hori_held = HorizontalQueue.NONE
@@ -78,7 +78,7 @@ func _process(delta: float) -> void:
 
 
 func switch_category(category):
-	current_category = posmod(category, Inventory.Categories.MAX)
+	current_category = posmod(category, Inventory.Categories.MAX) as Inventory.Categories
 	
 	
 	category_display.text = str("< ", Inventory.category_labels[current_category], " >")

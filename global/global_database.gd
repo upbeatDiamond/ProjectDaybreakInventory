@@ -596,13 +596,17 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 		query_conditions = str("bag_slot = '", compartment, "'") 
 	else:
 		query_conditions = "true"
-	var item_templates:Array = db.select_rows( "item", query_conditions, ["id", "tr_key", "sprite"] )
+	var item_templates:Array = db.select_rows( "item", query_conditions, ["id", "tr_key", "sprite", "tr_key_detail"] )
 	db.close_db()
 	
 	## Reformat the item templates from Patch Data to be easier to iterate through
 	var templates := {}
 	for item in item_templates:
-		templates[ item["id"] ] = item["tr_key"]
+		templates[ item["id"] ] = { 
+			"tr_key" : item["tr_key"],
+			"tr_key_detail" : item["tr_key_detail"],
+			"sprite_path" : item["sprite"],
+		}
 	
 	var filtered = []
 	
@@ -610,8 +614,10 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 	## prepare to submit it to the function caller.
 	for row in fetched:
 		if row["item"] in templates.keys():
-			row["tr_key"] = templates[row["item"]]
-			#row["sprite_path"] = templates[row[""]] ## TODO: have sprite loading from PatchData.
+			row["tr_key"] = templates[row["item"]]["tr_key"]
+			row["tr_key_detail"] = templates[row["item"]]["tr_key_detail"]
+			row["sprite_path"] = templates[row["item"]]["sprite_path"]
+			
 			filtered.append(row)
 	
 	return filtered

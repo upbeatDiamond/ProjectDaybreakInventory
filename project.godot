@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 GlobalBitManip="*res://global/global_bit_manip.gd"
 GlobalDatabase="*res://global/global_database.gd"
-GlobalDirector="*res://global/global_director.gd"
 GlobalMonster="*res://global/global_monster.gd"
 GlobalRuntime="*res://global/global_runtime.gd"
 GlobalTrx="*res://global/global_trx.gd"

@@ -183,13 +183,13 @@ func clean_up_descent( target_node : Node ):
 		current_mark.queue_free()
 
 
-func _input(event):
-	#if event.is_action_pressed("game_pause"):
-		#gamepieces_set_paused( !gamepieces_paused ) 
-		## use GameIOState.PAUSED_DEBUG if this is restored
-	#if event.is_action_pressed("debug_print"):
-		#print( GameIOState.find_key(current_io_state), " is the IO state?" )
-	pass
+#func _input(event):
+	##if event.is_action_pressed("game_pause"):
+		##gamepieces_set_paused( !gamepieces_paused ) 
+		### use GameIOState.PAUSED_DEBUG if this is restored
+	##if event.is_action_pressed("debug_print"):
+		##print( GameIOState.find_key(current_io_state), " is the IO state?" )
+	#pass
 
 
 
