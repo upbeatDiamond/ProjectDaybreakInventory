@@ -2,7 +2,7 @@ extends Control
 
 var umid : int = 0
 
-@onready var item_list_display : InventoryList = $Control
+@onready var item_list_display : InventoryList = $InventoryList
 @onready var category_display : Label = $CategoryLabel
 
 enum HorizontalQueue {
@@ -19,7 +19,10 @@ enum VerticalQueue {
 	UP_DOWN,
 }
 
+## User should hold down, and after a second, it scrolls through automatically
+const HORI_HELD_COOLDOWN_DURATION := 1.0
 var hori_held = 0
+var hori_held_cooldown = HORI_HELD_COOLDOWN_DURATION
 var vert_held = 0
 var current_category := Inventory.Categories.UNSORTED
 
@@ -73,11 +76,12 @@ func switch_category(category):
 	
 	category_display.text = str("< ", Inventory.category_labels[current_category], " >")
 	
-	_reset_cache()
+	await _reset_cache()
 	item_list_display.set_entry(0, 7, "Pineapple")
 	item_list_display.set_entry(1, 999, "Gas Powered Stick")
 	item_list_display.set_entry(2, 1, "Maddie Plush")
 	item_list_display.set_entry(3, 64, "Debug Stick")
+	
 	pass
 
 
@@ -88,5 +92,5 @@ func set_umid(_umid:int=0):
 
 func _reset_cache():
 	await item_list_display.clear_entries()
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	pass

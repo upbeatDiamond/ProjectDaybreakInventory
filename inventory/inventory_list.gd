@@ -41,7 +41,10 @@ func clear_entries():
 	if busy:
 		await busy_ended
 	busy = true
-	for item in slot_list.get_children():
+	
+	var children = slot_list.get_children().duplicate()
+	for item in children:
+		slot_list.remove_child(item)
 		item.queue_free()
 	
 	busy = false
@@ -129,6 +132,10 @@ func _sort_items():
 			neighbor = slot_list.get_children()[0]
 		node.focus_neighbor_bottom = neighbor.get_path()
 		neighbor.focus_neighbor_top = node.get_path()
+	
+	if slot_list.get_children().size() >= 1:
+		slot_list.get_children()[0].grab_focus()
+		slot_list.get_children()[0].grab_click_focus()
 
 
 # For descending order use > 0

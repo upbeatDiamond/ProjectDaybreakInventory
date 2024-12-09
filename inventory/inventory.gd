@@ -21,3 +21,15 @@ static var category_labels := {
 	Categories.KEY_ITEMS : "Key Items",
 	Categories.CASSETTES : "Cassettes",
 }
+
+var umid := 0
+
+
+func _init(umid:int) -> void:
+	self.umid = umid
+	
+	
+	
+	
+	
+	pass

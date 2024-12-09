@@ -28,7 +28,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 10
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer2"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -38,6 +38,8 @@ expand_mode = 5
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer2"]
 custom_minimum_size = Vector2(108, 56)
 layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/bold_italics_font_size = 8
 theme_override_font_sizes/italics_font_size = 8
 theme_override_font_sizes/mono_font_size = 8
@@ -45,7 +47,7 @@ theme_override_font_sizes/normal_font_size = 8
 theme_override_font_sizes/bold_font_size = 8
 text = "A glass flute that awakens sleeping monsters..."
 
-[node name="Control" parent="." instance=ExtResource("2_e0egu")]
+[node name="InventoryList" parent="." instance=ExtResource("2_e0egu")]
 layout_mode = 2
 anchors_preset = 0
 anchor_right = 0.0
