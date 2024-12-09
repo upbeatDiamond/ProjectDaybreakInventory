@@ -15,6 +15,7 @@ const verbosity_level : int = SQLite.VERBOSE
 # Used for balance patches and backwards compatibility with future monster additions
 # Please copy this file to user:// upon not finding one in user://
 var db_name_patch_base := "res://database/patchdata"
+var db_name_patch_user := "user://database/patchdata"
 
 # 3 Databases intended to be used for save file security.
 # Active updates as you play, but some players might not want to autosave.
@@ -96,7 +97,9 @@ var tkpv_level_map = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	_regenerate_user_database_folder() 
+	## ^ Called every session, to ensure the game has PatchData to work with.
+	## This should allow games to be moddable to some extent.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -384,17 +387,28 @@ func load_map_link_data():
 	#return true
 
 
-func reset_save_file() -> void:
-	
+func _regenerate_user_database_folder():
+	## Ensures there is a 'database' folder in the user save file
 	var directory_check = DirAccess.open("user://database")
 	if directory_check == null:
-		directory_check = DirAccess.get_open_error()
+		directory_check = DirAccess.get_open_error() 
+		## ^ Supposed to check to see if file can be made, but why bother?
 		DirAccess.make_dir_absolute("user://database")
 	
+	## Ensures there is a 'patchdata' database in the user save file
+	var patchdata_check = FileAccess.file_exists(db_name_patch_user)
+	if patchdata_check == false:
+		var db_patch = SQLite.new(); db_patch.path = db_name_patch_base; db_patch.open_db()
+		var globalized_patch_path = ProjectSettings.globalize_path(db_name_patch_user) + ".db"
+		db_patch.query("VACUUM INTO \"" + globalized_patch_path + "\"")
+		db_patch.close_db()
+	pass
+
+
+func reset_save_file() -> void:
 	var db_reset = SQLite.new(); db_reset.path = db_name_user_reset; db_reset.open_db()
 	#var db_commit = SQLite.new(); db_commit.path = db_name_user_commit; db_commit.open_db()
 	
-	#var globalized_backup_path = ProjectSettings.globalize_path(db_name_user_backup) + ".db"
 	var globalized_active_path = ProjectSettings.globalize_path(db_name_user_active) + ".db"
 	var globalized_commit_path = ProjectSettings.globalize_path(db_name_user_commit) + ".db"
 	
@@ -559,3 +573,7 @@ func validate_umid( umid:int=0 ) -> int:
 	#
 	
 	return umid
+
+
+func load_items( umid:int=0, compartment:int=0 ):
+	pass
