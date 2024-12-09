@@ -596,7 +596,7 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 		query_conditions = str("bag_slot = '", compartment, "'") 
 	else:
 		query_conditions = "true"
-	var item_templates:Array = db.select_rows( "item", query_conditions, ["id", "tr_key"] )
+	var item_templates:Array = db.select_rows( "item", query_conditions, ["id", "tr_key", "sprite"] )
 	db.close_db()
 	
 	## Reformat the item templates from Patch Data to be easier to iterate through
@@ -611,6 +611,7 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 	for row in fetched:
 		if row["item"] in templates.keys():
 			row["tr_key"] = templates[row["item"]]
+			#row["sprite_path"] = templates[row[""]] ## TODO: have sprite loading from PatchData.
 			filtered.append(row)
 	
 	return filtered
