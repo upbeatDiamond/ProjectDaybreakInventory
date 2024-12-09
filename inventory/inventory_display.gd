@@ -78,10 +78,7 @@ func _process(delta: float) -> void:
 
 
 func switch_category(category):
-	current_category = category
-	while current_category < 0:
-		current_category += Inventory.Categories.MAX
-	current_category = current_category % Inventory.Categories.MAX
+	current_category = posmod(category, Inventory.Categories.MAX)
 	
 	
 	category_display.text = str("< ", Inventory.category_labels[current_category], " >")
