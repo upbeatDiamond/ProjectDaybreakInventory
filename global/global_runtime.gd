@@ -16,23 +16,23 @@ var multiplayer_enabled: bool
 
 #@onready var scene_manager : SceneManager = get_node(^"/root/SceneManager")
 
-@export var overworld_root_path := ^"/root/SceneManager/PlayerCamView/SubViewport/InterfaceWorld" :
-	get:
-		return overworld_root_path
-	set(value):
-		overworld_root_path = value
-		overworld_root_node = get_node(value)
+#@export var overworld_root_path := ^"/root/SceneManager/PlayerCamView/SubViewport/InterfaceWorld" :
+	#get:
+		#return overworld_root_path
+	#set(value):
+		#overworld_root_path = value
+		#overworld_root_node = get_node(value)
 
-@onready var overworld_root_node : Node = get_node(overworld_root_path)
+#@onready var overworld_root_node : Node = get_node(overworld_root_path)
 
-@export var activity_root_path := ^"/root/SceneManager/InterfaceActivityWrapper/InterfaceActivity" :
-	get:
-		return activity_root_path
-	set(value):
-		activity_root_path = value
-		activity_root_node = get_node(value)
-
-@onready var activity_root_node : Node = get_node(activity_root_path)
+#@export var activity_root_path := ^"/root/SceneManager/InterfaceActivityWrapper/InterfaceActivity" :
+	#get:
+		#return activity_root_path
+	#set(value):
+		#activity_root_path = value
+		#activity_root_node = get_node(value)
+#
+#@onready var activity_root_node : Node = get_node(activity_root_path)
 
 
 signal pause_gameworld
@@ -187,8 +187,8 @@ func _input(event):
 	#if event.is_action_pressed("game_pause"):
 		#gamepieces_set_paused( !gamepieces_paused ) 
 		## use GameIOState.PAUSED_DEBUG if this is restored
-	if event.is_action_pressed("debug_print"):
-		print( GameIOState.find_key(current_io_state), " is the IO state?" )
+	#if event.is_action_pressed("debug_print"):
+		#print( GameIOState.find_key(current_io_state), " is the IO state?" )
 	pass
 
 

@@ -26,10 +26,13 @@ var hori_held_cooldown = HORI_HELD_COOLDOWN_DURATION
 var vert_held = 0
 var current_category := Inventory.Categories.UNSORTED
 
+var inventory : Inventory
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalDatabase.reset_save_file()
+	inventory = Inventory.new(0)
 	pass # Replace with function body.
 
 
@@ -60,28 +63,37 @@ func _process(delta: float) -> void:
 	
 	if prior_hori_held != hori_held and hori_held == HorizontalQueue.NONE:
 		## post the horizontal movement!
-		
-		switch_category(current_category + 1)
+		if prior_hori_held == HorizontalQueue.LEFT:
+			switch_category(current_category - 1)
+		elif prior_hori_held == HorizontalQueue.RIGHT:
+			switch_category(current_category + 1)
 		pass
 	
-	if prior_vert_held != vert_held and vert_held == VerticalQueue.NONE:
-		## post the vertical movement!
-		item_list_display.current_selected += 1
-		pass
+	#if prior_vert_held != vert_held and vert_held == VerticalQueue.NONE:
+		### post the vertical movement!
+		#item_list_display.current_selected += 1
+		#pass
 	
 	pass
 
 
 func switch_category(category):
-	current_category = category % Inventory.Categories.MAX
+	current_category = category
+	while current_category < 0:
+		current_category += Inventory.Categories.MAX
+	current_category = current_category % Inventory.Categories.MAX
+	
 	
 	category_display.text = str("< ", Inventory.category_labels[current_category], " >")
 	
+	var category_items = inventory.get_items_in_category(category)
+	
 	await _reset_cache()
-	item_list_display.set_entry(0, 7, "Pineapple")
-	item_list_display.set_entry(1, 999, "Gas Powered Stick")
-	item_list_display.set_entry(2, 1, "Maddie Plush")
-	item_list_display.set_entry(3, 64, "Debug Stick")
+	for item in category_items:
+		item_list_display.set_entry( str(item["item"]).to_int(), str(item["quantity"]).to_int(), item["tr_key"] )
+	#item_list_display.set_entry(1, 999, "Gas Powered Stick")
+	#item_list_display.set_entry(2, 1, "Maddie Plush")
+	#item_list_display.set_entry(3, 64, "Debug Stick")
 	
 	pass
 

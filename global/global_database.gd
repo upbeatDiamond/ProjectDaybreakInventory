@@ -584,7 +584,7 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 	
 	## Get all items listed for the selected user, then close the database.
 	var query_conditions : String = str("umid = '", umid, "'") 
-	var fetched:Array = db.select_rows( table_name_keyval, query_conditions, ["item", "quantity"] )
+	var fetched:Array = db.select_rows( "inventory", query_conditions, ["item", "quantity"] )
 	db.close_db()
 	
 	## Using the same database interface, open Patch Data
@@ -596,7 +596,7 @@ func load_inventory( umid:int=0, compartment:int=-1 ) -> Array:
 		query_conditions = str("bag_slot = '", compartment, "'") 
 	else:
 		query_conditions = "true"
-	var item_templates:Array = db.select_rows( table_name_keyval, query_conditions, ["id", "tr_key"] )
+	var item_templates:Array = db.select_rows( "item", query_conditions, ["id", "tr_key"] )
 	db.close_db()
 	
 	## Reformat the item templates from Patch Data to be easier to iterate through
