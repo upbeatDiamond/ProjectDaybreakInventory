@@ -23,13 +23,22 @@ static var category_labels := {
 }
 
 var umid := 0
+var items : Array[Array] = []
 
 
 func _init(umid:int) -> void:
 	self.umid = umid
-	
-	
-	
-	
-	
+	_repopulate()
 	pass
+
+
+func _repopulate() -> void:
+	
+	items.resize( Categories.MAX )
+	
+	for category in range(Categories.MAX):
+		items[category] = GlobalDatabase.load_inventory(umid, category)
+
+
+func get_items_in_category(category:int):
+	return items[category % Categories.MAX]

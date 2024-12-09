@@ -29,6 +29,7 @@ var current_category := Inventory.Categories.UNSORTED
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GlobalDatabase.reset_save_file()
 	pass # Replace with function body.
 
 
