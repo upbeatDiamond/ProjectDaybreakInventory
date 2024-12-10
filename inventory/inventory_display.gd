@@ -92,7 +92,7 @@ func switch_category(category):
 	await _reset_cache()
 	for item in category_items:
 		item_list_display.set_entry( str(item["item"]).to_int(), str(item["quantity"]).to_int(), 
-		item["tr_key"], item["tr_key_detail"], item["sprite_path"] )
+		item["tr_key"], item["tr_key_detail"], item["sprite_path"], item["stack_size"] )
 	
 	pass
 

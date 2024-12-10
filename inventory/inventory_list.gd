@@ -54,7 +54,7 @@ func clear_entries():
 ## If the item cannot be found, add it to the list
 ## Set the item count to 'count'.
 ## If 'item' is a tag, change it to the index. If the index cannot be found, use a hash of the tag.
-func set_entry(item, count:int, text:String, description:String, icon:String=""):
+func set_entry(item, count:int, text:String, description:String, icon:String="", stack_size:=999):
 	
 	## TODO: Replace with database access!!!
 	if not item is int:
@@ -64,6 +64,8 @@ func set_entry(item, count:int, text:String, description:String, icon:String="")
 	
 	for slot in slot_list.get_children():
 		if str(slot.item) == str(item):
+			if stack_size <= 1:
+				slot.count_label.visible = false
 			slot.count = count
 			slot.text = text
 			was_found = true
